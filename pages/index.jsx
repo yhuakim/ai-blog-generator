@@ -26,10 +26,15 @@ export default function Home() {
       })
       const data = await res.json()
       console.log(data);
-      setContent(data)
-      setLoading(false)
+      if (data.status === 'success') {
+        setContent(data.data)
+        setLoading(false)
+      } else {
+        alert(data.error)
+        setLoading(false)
+      }
     } catch (error) {
-      console.log(error);
+      console.error(error?.errorMessage);
     }
   }
 
